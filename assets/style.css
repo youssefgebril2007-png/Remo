@@ -1,0 +1,337 @@
+/* ===== Remo's Birthday Website 🎀 ===== */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #f8c8dc;
+    --deep-pink: #d9578b;
+    --dark-pink: #a83e6b;
+    --cream: #fffaf5;
+    --text: #75465b;
+    --shadow: rgba(176, 76, 119, 0.16);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 35px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 10% 15%, #fff5f8 0 5%, transparent 25%),
+        radial-gradient(circle at 90% 80%, #f5c6da 0 5%, transparent 30%),
+        linear-gradient(135deg, #fff0f5, #f9d6e5, #fff7f1);
+    background-attachment: fixed;
+}
+
+/* Main birthday card */
+
+.birthday-card {
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    margin: auto;
+    padding: 38px 30px;
+    text-align: center;
+    background: rgba(255, 250, 245, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    box-shadow:
+        0 22px 65px var(--shadow),
+        0 4px 15px rgba(255, 255, 255, 0.8);
+    animation: cardEnter 1s ease both;
+}
+
+.birthday-card::before {
+    content: "♡";
+    position: absolute;
+    top: 13px;
+    left: 20px;
+    color: #e9a1bf;
+    font-size: 30px;
+    transform: rotate(-15deg);
+}
+
+.birthday-card::after {
+    content: "♡";
+    position: absolute;
+    right: 20px;
+    bottom: 12px;
+    color: #e9a1bf;
+    font-size: 30px;
+    transform: rotate(15deg);
+}
+
+h1 {
+    margin: 0 0 8px;
+    color: var(--dark-pink);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    letter-spacing: 1px;
+    animation: softFloat 3s ease-in-out infinite;
+}
+
+h2 {
+    margin: 12px 0;
+    color: var(--deep-pink);
+    font-size: clamp(1.25rem, 4vw, 1.8rem);
+}
+
+.cake {
+    margin: 18px 0;
+    font-size: 68px;
+    animation: cakeBounce 2.5s ease-in-out infinite;
+}
+
+.birthday-message {
+    max-width: 520px;
+    margin: 22px auto;
+    font-size: 17px;
+    line-height: 1.9;
+}
+
+/* Surprise button */
+
+#surpriseButton {
+    display: inline-block;
+    max-width: 100%;
+    margin: 12px 0 18px;
+    padding: 15px 26px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ee8fb5, #d9578b);
+    box-shadow: 0 8px 22px rgba(217, 87, 139, 0.25);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+#surpriseButton:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 28px rgba(217, 87, 139, 0.35);
+    filter: saturate(1.1);
+}
+
+#surpriseButton:active {
+    transform: scale(0.97);
+}
+
+#surpriseButton:focus-visible {
+    outline: 3px solid #a83e6b;
+    outline-offset: 4px;
+}
+
+/* Secret message */
+
+#secretMessage {
+    max-width: 550px;
+    margin: 18px auto 28px;
+    padding: 22px;
+    border: 1px solid #f6d4e2;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #fff0f6, #fffaf5);
+    color: #9d426c;
+    font-size: 17px;
+    line-height: 2;
+    box-shadow: 0 8px 24px rgba(185, 85, 125, 0.09);
+    animation: messageAppear 0.8s ease both;
+}
+
+#secretMessage[hidden],
+#photoGallery[hidden] {
+    display: none !important;
+}
+
+/* Photo gallery */
+
+.photo-gallery {
+    margin-top: 32px;
+    animation: messageAppear 0.9s ease both;
+}
+
+.photo-gallery h3 {
+    margin: 0 0 24px;
+    color: var(--dark-pink);
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+}
+
+.photos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    align-items: start;
+}
+
+.photo-item {
+    min-width: 0;
+    padding: 10px 10px 14px;
+    overflow: hidden;
+    border: 1px solid #f5dce6;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 8px 22px rgba(130, 67, 93, 0.12);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.photo-item:nth-child(odd) {
+    transform: rotate(-1.5deg);
+}
+
+.photo-item:nth-child(even) {
+    transform: rotate(1.5deg);
+}
+
+.photo-item:hover {
+    z-index: 1;
+    transform: translateY(-6px) rotate(0) scale(1.025);
+    box-shadow: 0 16px 32px rgba(130, 67, 93, 0.2);
+}
+
+.photo-item img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 9px;
+    background: #fbe8ef;
+    transition: filter 0.3s ease;
+}
+
+.photo-item:hover img {
+    filter: saturate(1.08);
+}
+
+.photo-item p {
+    margin: 13px 2px 2px;
+    color: #81516a;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+/* Footer */
+
+footer {
+    margin-top: 30px;
+    color: #b16a8b;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/* Animations */
+
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes softFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes cakeBounce {
+    0%, 100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-7px) rotate(3deg);
+    }
+}
+
+/* Mobile-friendly layout */
+
+@media (max-width: 480px) {
+    body {
+        padding: 18px 10px;
+    }
+
+    .birthday-card {
+        padding: 32px 16px;
+        border-radius: 24px;
+    }
+
+    .birthday-message {
+        font-size: 15px;
+    }
+
+    #secretMessage {
+        padding: 17px 13px;
+        font-size: 15px;
+    }
+
+    .photos {
+        gap: 13px;
+    }
+
+    .photo-item {
+        padding: 6px 6px 10px;
+        border-radius: 12px;
+    }
+
+    .photo-item p {
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    .cake {
+        font-size: 58px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
